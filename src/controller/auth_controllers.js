@@ -1,34 +1,33 @@
 import users from "../data/db.js";
+import db from "../data/db.js";
 
 export function register(req,res){
-    console.log(req.body);
-    let isValid = registerValidation(req.body,res);
-    if(!isValid) {
-        res.status(400).json({
-            success: true,
-            data: req.body,
-            message:"REGISTER failed: User or password is empty"
-        });
+    let valid = registerValidation(req.body,res);
+    if(!valid) {
         return;
     }
     let userHave = addUser(req.body);
+
     if(userHave) {
         res.status(201).json({
             success: true,
-            data: req.body,
-            message:"REGISTER"
+            message:"REGISTER Succes"
         });
     } else {
-        res.status(201).json({
+        res.status(200).json({
             success: false,
-            data: req.body,
             message:"REGISTER: User already exist"
         });
     }
+    console.log(db);
 
 }
-export function login(req,res){
-    console.log(req.body);
+
+export function login(req,res) {
+    let valid = registerValidation(req.body,res,false);
+    if(!valid) {
+        return;
+    }
     res.status(201).json({
         success: true,
         data: req.body,
@@ -36,10 +35,9 @@ export function login(req,res){
     });
 }
 
-
 function addUser(user) {
-    for(let key in users) {
-        if(user.email===users[key].email) {
+    for(let key in db) {
+        if(user.email===db[key].email) {
             return false;
         }
     }
@@ -47,16 +45,30 @@ function addUser(user) {
     return true;
 }
 
+function registerValidation(user,res,isRegister = true) {
+    console.log("9"*50);
+    let message = "";
+    const regex = /\S+@\S+\.\S+/;
+    const strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-function registerValidation(user) {
-    return !(!user.email || !user.password);
-}
-
-function loginUser(user) {
-    for(let key in users) {
-        if(user.id===users[key].id && user.email===users[key].email) {
-            return false;
-        }
+    if(!user.email) {
+        message = `${isRegister?"REGISTER":"Login"} failed: User email bo'sh`;
     }
-    return true;
+    else if(!user.password) {
+        message = `${isRegister?"REGISTER":"Login"} failed: User password bo'sh`;
+    }
+    else if(!regex.test(user.email)) {
+        message = `${isRegister?"REGISTER":"Login"} failed: email valid emas`
+    }
+    else if(!strongRegex.test(user.password)) {
+        message = `${isRegister?"REGISTER":"Login"} failed: password valid emas`
+    }
+    if(message) {
+        res.status(400).json({
+            success: false,
+            message:message
+        });
+    }
+    return message==="";
 }
+
