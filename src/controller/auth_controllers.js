@@ -28,9 +28,15 @@ export function login(req,res) {
     if(!valid) {
         return;
     }
+    let userHave = userInDB(req.body);
+    if(!userHave) {
+        res.status(404).json({
+            success: true,
+            message:"LOGIN failed: User topilmadi"
+        });
+    }
     res.status(201).json({
         success: true,
-        data: req.body,
         message:"LOGIN"
     });
 }
@@ -72,3 +78,11 @@ function registerValidation(user,res,isRegister = true) {
     return message==="";
 }
 
+function userInDB(user) {
+    for(let key in db) {
+        if(user.email===db[key].email) {
+            return true;
+        }
+    }
+    return false;
+}
