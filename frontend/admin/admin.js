@@ -79,8 +79,6 @@ async function loadProducts() {
 
   const data = await response.json();
 
-  console.log(data);
-
   renderProducts(data.data);
 }
 
@@ -282,12 +280,19 @@ async function onCreateProduct(data) {
     },
     body: JSON.stringify(data)
   });
-  console.log(data);
   const value = await response.json();
   alert(value.message);
 }
 async function onUpdateProduct(id, data) {
-  console.log(data);
+  const response = await fetch(BASE_URL + `/api/products/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data)
+  });
+  const value = await response.json();
+  alert(value.message);
 }
 async function onDeleteProduct(id) {}
 
