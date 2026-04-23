@@ -37,7 +37,7 @@ export function createProduct(req,res){
         category,
         inStock,
         description,
-        imageUrl
+        image_url
     } = req.body;
 
     if(
@@ -46,7 +46,7 @@ export function createProduct(req,res){
         !category ||
         !inStock ||
         !description ||
-        !imageUrl
+        !image_url
     ) {
         return res.status(400).json({
             message: "All fields are required!",
@@ -63,7 +63,7 @@ export function createProduct(req,res){
         category,
         inStock,
         description,
-        imageUrl,
+        image_url,
         createdAt,
         id
     };
@@ -86,7 +86,7 @@ export function updateProduct(req,res) {
         category,
         inStock,
         description,
-        imageUrl
+        image_url
     } = req.body;
 
     if(
@@ -95,7 +95,7 @@ export function updateProduct(req,res) {
         !category ||
         !inStock ||
         !description ||
-        !imageUrl
+        !image_url
     ) {
         return res.status(400).json({
             message: "All fields are required!",
@@ -119,7 +119,7 @@ export function updateProduct(req,res) {
         category===product.category &&
         inStock===product.inStock &&
         description===product.description &&
-        imageUrl===product.imageUrl
+        image_url===product.image_url
     ) {
         return res.status(400).json({
             message: "No changes detected",
@@ -131,7 +131,8 @@ export function updateProduct(req,res) {
     product.category = category;
     product.inStock = inStock;
     product.description = description;
-    product.imageUrl = imageUrl;
+    product.image_url = image_url;
+    product.updatedAt = new Date().toISOString();
     return res.status(200).json({
         message: "Product has been changed",
         success: true,
