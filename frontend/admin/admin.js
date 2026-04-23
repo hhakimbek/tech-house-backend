@@ -294,7 +294,17 @@ async function onUpdateProduct(id, data) {
   const value = await response.json();
   alert(value.message);
 }
-async function onDeleteProduct(id) {}
+async function onDeleteProduct(id) {
+  console.log(id);
+  const response = await fetch(BASE_URL + `/api/products/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const value = await response.json();
+  alert(value.message);
+}
 
 // ── Init ──────────────────────────────────────────────
 
