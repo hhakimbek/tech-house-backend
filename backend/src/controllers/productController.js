@@ -35,7 +35,7 @@ export function createProduct(req,res){
         name,
         price,
         category,
-        inStock,
+        stock,
         description,
         image_url
     } = req.body;
@@ -44,7 +44,7 @@ export function createProduct(req,res){
         !name ||
         !price ||
         !category ||
-        !inStock ||
+        !stock ||
         !description ||
         !image_url
     ) {
@@ -61,7 +61,7 @@ export function createProduct(req,res){
         name,
         price,
         category,
-        inStock,
+        stock,
         description,
         image_url,
         createdAt,
@@ -84,7 +84,7 @@ export function updateProduct(req,res) {
         name,
         price,
         category,
-        inStock,
+        stock,
         description,
         image_url
     } = req.body;
@@ -93,7 +93,7 @@ export function updateProduct(req,res) {
         !name ||
         !price ||
         !category ||
-        !inStock ||
+        !stock ||
         !description ||
         !image_url
     ) {
@@ -117,7 +117,7 @@ export function updateProduct(req,res) {
         name===product.name &&
         price===product.price &&
         category===product.category &&
-        inStock===product.inStock &&
+        stock===product.stock &&
         description===product.description &&
         image_url===product.image_url
     ) {
@@ -129,7 +129,7 @@ export function updateProduct(req,res) {
     product.name = name;
     product.price = price;
     product.category = category;
-    product.inStock = inStock;
+    product.stock = stock;
     product.description = description;
     product.image_url = image_url;
     product.updatedAt = new Date().toISOString();

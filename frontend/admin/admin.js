@@ -54,7 +54,7 @@ function renderProducts(products) {
         <td>${p.name || "—"}</td>
         <td>${p.category || "—"}</td>
         <td>$${Number(p.price || 0).toFixed(2)}</td>
-        <td>${p.inStock ?? "—"}</td>
+        <td>${p.stock ?? "—"}</td>
         <td class="actions-cell">
           <button class="btn btn-edit"   onclick="openEditModal('${p.id}')">Edit</button>
           <button class="btn btn-danger" onclick="openDeleteModal('${p.id}', '${(p.name || "").replace(/'/g, "\\'")}')">Delete</button>
@@ -276,10 +276,11 @@ document
 
 async function onCreateProduct(data) {
   const response = await fetch(BASE_URL + "/api/products", {
-    method: "GET",
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
+    body: JSON.stringify(data)
   });
   console.log(data);
   const value = await response.json();
