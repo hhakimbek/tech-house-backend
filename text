@@ -6,3 +6,41 @@ server -> app -> routes -> controllers -> DB <--|
   v    v    |                          |        |
 /api/auth --|                          |        |
             |----------> login() <--------->----|
+
+
+contollerga userController ochiladi
+fronted da ham userhome papka ochib ui iqlinidai unda productla va savat kabi dashboard bo'ladi.
+productlani olishga bosib + yoki - qilib savatga qo'shganida savatga qo'shiladi
+savatni kodlari ham userControllerd BO'LADI. array bo'ladi array ichida esa object bo'ladi.
+Har bir object da masalan userid(yaniy client), product id, product count bo'ladi.
+savatcha sahifasida esa shu arrray dagi id dan fpydalanib prodyuct data chaqiriladi.
+Chaqirilgach countig qarab price larni hisoblanib chiqariladi. va purchase qilgach tasdiqlanadi.
+Keyin oluvchi ism familiyasi telefon raqqam malumotlari kiriladi. Manzil qabul qilish uchun kiritiladi.
+Va order tax bo'ladi unga it ham qo'shiladi. Va deliviring status yoki collcting deydi va ketadi. Mahsulotlardan - bo'ladi.
+Mahsulotlardan - bo'lishi uchun. for da productni edit qilinadi aynan quantitysi.
+Buning uchun patch yozsak yaxshi tajriba ham bo'lardi.
+Order da id, status, adress, va products qismida productlarimiz bo'ladi.
+
+
+
+
+Controller’da userController ochiladi.
+Frontend’da ham userhome papka ochib UI qilinadi. Unda productlar va savat kabi dashboard bo‘ladi.
+Productlarni olishga bosib, + yoki - qilib savatga qo‘shganida savatga qo‘shiladi.
+Savatni kodlari ham userControllerda bo‘ladi. Array bo‘ladi, array ichida esa object bo‘ladi.
+Har bir object’da masalan:
+userId (ya’ni client),
+productId,
+productCount bo‘ladi.
+Savatcha sahifasida esa shu array’dagi iddan foydalanib product data chaqiriladi.
+Chaqirilgach, countiga qarab price’lar hisoblanib chiqariladi va purchase qilgach tasdiqlanadi.
+Keyin oluvchi ism, familiyasi, telefon raqam ma’lumotlari kiritiladi. Manzil qabul qilish uchun kiritiladi.
+Va order tax bo‘ladi, unga item ham qo‘shiladi. Va delivering status yoki collecting deydi va ketadi.
+Mahsulotlardan - bo‘ladi.
+Mahsulotlardan - bo‘lishi uchun forda product edit qilinadi, aynan quantity’si.
+Buning uchun PATCH yozsak yaxshi tajriba ham bo‘lardi.
+Order’da:
+id,
+status,
+address,
+va products qismida productlarimiz bo‘ladi.

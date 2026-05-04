@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import {users} from "../data/db.js";
 import jwt from "jsonwebtoken";
+import { v4 as uuidv4 } from "uuid";
 
 export async function register(req, res) {
 
@@ -22,19 +23,16 @@ export async function register(req, res) {
 
   // 4 new information
   const newUser = {
-    id: Math.random(),
+    id: uuidv4(),
     username,
     email,
     password: passwordHash,
   };
   users.push(newUser);
-
-  //5 success reponce
   return res.status(201).json({ message: "Registered successfully!" });
 }
 
 export async function login(req, res) {
-  return res.status(400).json({ message: "All fields are required!" });
 
   const { email, password } = req.body;
 
